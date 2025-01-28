@@ -4,16 +4,15 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from plotly import express as px
 
-# Load the dataset
-data_path = "Tesla-Stock-Dashboard/Tesla Stock Data.csv"  # Ensure this file is in the same directory
+# Set the page configuration (must be at the top)
+st.set_page_config(page_title="Tesla Stock Analysis", layout="wide", page_icon="📈")
 
+# Load the dataset
+data_path = "Tesla Stock Data.csv"  # Ensure this file is in the same directory
 df = pd.read_csv(data_path)
 
 # Convert 'Date' column to datetime format
 df['Date'] = pd.to_datetime(df['Date'])
-
-# Set the page configuration
-st.set_page_config(page_title="Tesla Stock Analysis", layout="wide", page_icon="📈")
 
 # Custom CSS for styling
 st.markdown(
@@ -62,7 +61,7 @@ def plot_bar_chart():
 
 def plot_histogram():
     st.subheader("📊 Histogram: Adjusted Closing Prices")
-    fig = px.histogram(df, x='Adj Closinie', nbins=20, title="Distribution of Adjusted Closing Prices")
+    fig = px.histogram(df, x='Adj Close', nbins=20, title="Distribution of Adjusted Closing Prices")
     st.plotly_chart(fig, use_container_width=True)
 
 def plot_box_plot():
@@ -93,8 +92,9 @@ def plot_area_chart():
 
 def plot_pair_plot():
     st.subheader("🔗 Pair Plot: Numeric Columns")
-    fig = sns.pairplot(df[['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume']])
-    st.pyplot(fig)
+    pairplot_fig = sns.pairplot(df[['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume']])
+    plt.title("Pair Plot of Numeric Columns")
+    st.pyplot(pairplot_fig.fig)
 
 def plot_moving_average():
     st.subheader("📈 Moving Average (30 Days): Closing Prices")
@@ -123,4 +123,4 @@ plot_moving_average()
 
 # Footer
 st.sidebar.markdown("---")
-st.sidebar.info("Created by Samar Murtaza,\nSamiullah\nand Huzaifa Rehman Qureshi. ")
+st.sidebar.info("Created by Samar Murtaza, Samiullah, and Huzaifa Rehman Qureshi.")
