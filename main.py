@@ -5,7 +5,7 @@ import seaborn as sns
 from plotly import express as px
 
 # Load the dataset
-data_path = "Tesla Stock Data.csv"  # Ensure this file is in the same directory
+data_path = "Tesla-Stock-Dashboard/Tesla Stock Data.csv"  # Ensure this file is in the same directory
 
 df = pd.read_csv(data_path)
 
